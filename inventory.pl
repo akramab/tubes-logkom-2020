@@ -1,10 +1,18 @@
 :- dynamic(currentItemsInInventory/1).
 :- dynamic(currentInventory/1).
 
-/*BELUM ADA LIMIT INVENTORY (TULISANNYA SIH 100, TAPI ITU TULISAN DOANG)*/
 maxInventory(100).
-
 currentInventory([]).
+
+isFull :-
+    cekInventory(Limit),
+    Limit == 100.
+
+addItem(_) :-
+    cekInventory(Limit),
+    maxInventory(Max),
+    Limit == Max,
+    write('Inventory kamu Penuh.'),!,fail.
 
 addItem(NewItem) :-
     currentInventory(CurrentInventory),
@@ -15,9 +23,20 @@ addItem(NewItem) :-
 addItem(_,0) :- !.
 addItem(NewItem,Amount) :-
     addItem(NewItem),
-    AmountNow is (Amount - 1),
+    AmountNow is (Amount + 1),
     addItem(NewItem,AmountNow).
 
+delItem(Item) :-
+    currentInventory(CurrentInventory),
+    append(CurrentInventory,[Item],Inventory),
+    retractall(currentInventory(_)),
+    asserta(currentInventory(Inventory)),!.
+
+delItem(_) :- !.
+delItem(Item,Amount) :-
+    delItem(Item),
+    AmountNow is (Amount - 1),
+    delItem(Item,AmountNow).
 
 countItem(_,[],0).
 countItem(H,[H|T],N) :- countItem(H,T,N1), N is 1 + N1, !.
