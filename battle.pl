@@ -368,15 +368,28 @@ enemyTurn :-
     typeModifier(PAttackType,EAttackType,_, ETypeMod),
 
     EAttackPower is (EAttack*2),
-    TotalEMod is (EElementalMod*ETypeMod),
-    totalDamage(ELevel,EAttackPower,EAttack,PDefense,TotalEMod,TotalEnemyDamage),
-    PHealthNow is (PCurrentHealth - TotalEnemyDamage),
-    retractall(playerCurrentHealth(_)),
-    asserta(playerCurrentHealth(PHealthNow)),
 
-    format('~w attacks!It dealt ~w damage!\n',[EName,TotalEnemyDamage]),
+    random(1,11,SpecialAttack),
 
-    endTurn(Turn),
+    (SpecialAttack > 7 ->
+        TotalEMod is (EElementalMod*ETypeMod*2),
+        totalDamage(ELevel,EAttackPower,EAttack,PDefense,TotalEMod,TotalEnemyDamage),
+        PHealthNow is (PCurrentHealth - TotalEnemyDamage),
+        retractall(playerCurrentHealth(_)),
+        asserta(playerCurrentHealth(PHealthNow)),
+
+        format('~w uses Special Attack!\nIt\'s stronger than the usual!\nIt dealt ~w damage!\n',[EName,TotalEnemyDamage]),
+        endTurn(Turn)
+
+    ;TotalEMod is (EElementalMod*ETypeMod),
+        totalDamage(ELevel,EAttackPower,EAttack,PDefense,TotalEMod,TotalEnemyDamage),
+        PHealthNow is (PCurrentHealth - TotalEnemyDamage),
+        retractall(playerCurrentHealth(_)),
+        asserta(playerCurrentHealth(PHealthNow)),
+
+        format('~w attacks!It dealt ~w damage!\n',[EName,TotalEnemyDamage]),
+
+        endTurn(Turn)),
     !.
 
 
