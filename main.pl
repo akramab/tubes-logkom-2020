@@ -33,8 +33,13 @@ consoleLoop :-
     read(X),
     ( /* semua pemanggilan fungsi masuk ke sini */
     /* format if-then-else di Prolog: */
-    /* (<if-1> -> <then-1>) ; */
-    /* (<else if-2> -> <then-2>) ; */
-    /* (<else if-3> -> <then-3>) ; */
+    /* (<if-1> -> <then-1>, fail) ; */
+    /* (<else if-2> -> <then-2>, fail) ; */
+    /* (<else if-3> -> <then-3>, fail) ; */
+    /* Contoh: */
+    (X == w -> moveW, fail) ; /* diberi fail agar program balik ke repeat */
+    (X == a -> moveA, fail) ;
+    (X == s -> moveS, fail) ;
+    (X == d -> moveD, fail) ;
     (X == quit) /* program selesai ketika player mengetikkan quit */
     ).
