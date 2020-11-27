@@ -15,7 +15,7 @@
 gameState('Safe').
 
 start :-
-    write('Welcome to Bla.'),
+    write('Welcome to <INSERT GAME NAME HERE>.'), nl,
     initClass, /* Inisialisasi class, terdapat di player.pl */
     initMap, /* Inisialisasi map, terdapat di map.pl */
     nl,
