@@ -6,6 +6,7 @@
 :- include('inventory.pl').
 :- include('shop.pl').
 :- include('map.pl').
+:- include('quest.pl').
 
 :- dynamic(gameState/1).
 
@@ -19,18 +20,20 @@ start :-
     initClass, /* Inisialisasi class, terdapat di player.pl */
     initMap, /* Inisialisasi map, terdapat di map.pl */
     nl,
+    map,
     consoleLoop.
 
 consoleLoop :-
     repeat,
-    map,
     write('Commands:'), nl, /* Placeholder, silakan diganti, belum diimplementasikan */
     write('Format: <command>.'), nl,
     write('w -- move up'), nl,
     write('a -- move left'), nl,
     write('s -- move down'), nl,
     write('d -- move right'), nl,
+    write('map -- show map (will automatically be shown if the player moves)'), nl,
     write('status -- show player status'), nl,
+    write('quest -- show active quest'), nl,
     write('quit -- quit the game'), nl,
     write(' > '),
     read(X),
@@ -44,6 +47,8 @@ consoleLoop :-
     (X == a -> nl, moveA, fail) ;
     (X == s -> nl, moveS, fail) ;
     (X == d -> nl, moveD, fail) ;
+    (X == map -> nl, map, fail) ;
     (X == status -> nl, status, fail) ;
+    (X == quest -> nl, questLog, fail) ;
     (X == quit) /* program selesai ketika player mengetikkan quit */
     ).
