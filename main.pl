@@ -24,7 +24,7 @@ start :-
 consoleLoop :-
     repeat,
     map,
-    write('Commands:'), nl, /* Belum diimplementasikan */
+    write('Commands:'), nl, /* Placeholder, silakan diganti, belum diimplementasikan */
     write('1. moveW'), nl,
     write('2. moveA'), nl,
     write('3. moveS'), nl,
@@ -32,7 +32,9 @@ consoleLoop :-
     write(' > '),
     read(X),
     ( /* semua pemanggilan fungsi masuk ke sini */
-    /* (<if> -> <then>) ; */
-    /* (<if> -> <then>) ; */
+    /* format if-then-else di Prolog: */
+    /* (<if-1> -> <then-1>) ; */
+    /* (<else if-2> -> <then-2>) ; */
+    /* (<else if-3> -> <then-3>) ; */
     (X == quit) /* program selesai ketika player mengetikkan quit */
     ).
