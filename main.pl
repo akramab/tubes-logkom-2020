@@ -25,10 +25,13 @@ consoleLoop :-
     repeat,
     map,
     write('Commands:'), nl, /* Placeholder, silakan diganti, belum diimplementasikan */
-    write('1. w -> move up'), nl,
-    write('2. a -> move left'), nl,
-    write('3. s -> move down'), nl,
-    write('4. d -> move right'), nl,
+    write('Format: <command>.'), nl,
+    write('w -- move up'), nl,
+    write('a -- move left'), nl,
+    write('s -- move down'), nl,
+    write('d -- move right'), nl,
+    write('status -- show player status'), nl,
+    write('quit -- quit the game'), nl,
     write(' > '),
     read(X),
     ( /* semua pemanggilan fungsi masuk ke sini */
@@ -37,9 +40,10 @@ consoleLoop :-
     /* (<else if-2> -> <then-2>, fail) ; */
     /* (<else if-3> -> <then-3>, fail) ; */
     /* Contoh: */
-    (X == w -> moveW, fail) ; /* diberi fail agar program balik ke repeat */
-    (X == a -> moveA, fail) ;
-    (X == s -> moveS, fail) ;
-    (X == d -> moveD, fail) ;
+    (X == w -> nl, moveW, fail) ; /* diberi fail agar program balik ke repeat */
+    (X == a -> nl, moveA, fail) ;
+    (X == s -> nl, moveS, fail) ;
+    (X == d -> nl, moveD, fail) ;
+    (X == status -> nl, status, fail) ;
     (X == quit) /* program selesai ketika player mengetikkan quit */
     ).

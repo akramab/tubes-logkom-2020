@@ -26,10 +26,10 @@ initMap :-
     retractall(wall8(_,_)),
     retractall(wall9(_,_)),
     retractall(questBoard(_,_)),*/
-    asserta(height(25)),
-    asserta(width(25)),
-    random(11, 25, YPlayer),
-    random(11, 25, XPlayer),
+    asserta(height(12)),
+    asserta(width(24)),
+    random(11, 12, YPlayer),
+    random(11, 24, XPlayer),
     asserta(posPlayer(XPlayer, YPlayer)).
 
 isEdgeW(_, Y) :- 
