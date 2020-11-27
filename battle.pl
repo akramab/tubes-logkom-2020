@@ -110,8 +110,8 @@ winGameCondition :-
 
 loseCondition :- 
     write('You\'ve died. Because of your incompetence, the world is now doomed!'),nl,
-    write('You can try again by selecting New Game or Load to start from your last saved checkpoint.'),nl,
-    write('Or you can also quit the game by terminating the Terminal. Your choice.').
+    write('You can try again by starting a new game.'),nl,
+    write('Or you can also quit the game by closing the Terminal. Your choice.').
 winBattleCondition :-
     retractall(gameState(_)),
     asserta(gameState('Roam')),
