@@ -24,7 +24,7 @@ battleEnemy :-
     ;!).
 
 battleHelp :-
-    currentEnemyName(EName),
+    currentEnemyName(EName),!,
     write('attack -- use basic attack on the enemy'),nl,
     write('specialAttack -- unleash your special attack and consume 3 special attack charges'),nl,
     write('usePotion -- use potion to heal yourself'),nl,
