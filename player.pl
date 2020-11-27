@@ -19,6 +19,18 @@
 
 :- dynamic(playerEquipmentWear/4).
 
+initClass :-
+    write('Choose your class:'), nl,
+    write('Format: <class>.'), nl,
+    write('1. swordsman'), nl,
+    write('2. archer'), nl,
+    write('3. sorcerer'), nl,
+    repeat,
+    write(' > '),
+    read(Class),
+    ((Class == swordsman -> Job = 'Swordsman'); (Class == archer -> Job = 'Archer'); (Class == sorcerer -> Job = 'Sorcerer')),
+    initPlayer(Job).
+
 /* PLAYER'S STATUS */
 playerJob('Otherworlder').
 playerBaseJob('????').
