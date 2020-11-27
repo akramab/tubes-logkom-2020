@@ -1,4 +1,3 @@
-:- include('map.pl').
 :- dynamic(playerJob/1).
 :- dynamic(playerBaseJob/1).
 :- dynamic(playerJobRank/1).
@@ -20,9 +19,6 @@
 
 :- dynamic(playerEquipmentWear/4).
 
-/* Kode program masih akan diubah dan dikembangkan. Ini masih tahap mencoba. Sumber 1 : https://github.com/littlemight/TubesLogkom-Tokemon */
-/* Sumber 2 : https://github.com/stanleyyoga123/Tubes-Logif */
-
 initClass :-
     write('Choose your class:'), nl,
     write('Format: <class>.'), nl,
@@ -32,8 +28,8 @@ initClass :-
     repeat,
     write(' > '),
     read(Class),
-    (Class == swordsman; Class == archer; Class == sorcerer),
-    initPlayer(Class).
+    ((Class == swordsman -> Job = 'Swordsman'); (Class == archer -> Job = 'Archer'); (Class == sorcerer -> Job = 'Sorcerer')),
+    initPlayer(Job).
 
 /* PLAYER'S STATUS */
 playerJob('Otherworlder').

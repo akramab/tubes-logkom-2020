@@ -26,10 +26,10 @@ initMap :-
     retractall(wall8(_,_)),
     retractall(wall9(_,_)),
     retractall(questBoard(_,_)),*/
-    asserta(height(25)),
-    asserta(width(25)),
-    random(11, 25, YPlayer),
-    random(11, 25, XPlayer),
+    asserta(height(12)),
+    asserta(width(24)),
+    random(11, 12, YPlayer),
+    random(11, 24, XPlayer),
     asserta(posPlayer(XPlayer, YPlayer)).
 
 isEdgeW(_, Y) :- 
@@ -48,7 +48,7 @@ isEdge(X, Y) :-
     isEdgeW(X, Y); 
     isEdgeA(X, Y); 
     isEdgeS(X, Y); 
-    isEdgeD(X, Y);  
+    isEdgeD(X, Y); 
     wall(X,Y).
 store1(10,10).
 store2(6,7).
@@ -94,7 +94,7 @@ map :-
 /* Sumber Referensi : https://github.com/littlemight/TubesLogkom-Tokemon */
 
 /* MOVE */
-move(w) :-
+moveW :-
     posPlayer(CurrX,CurrY),
     NewCurrY is (CurrY - 1),
     (isEdge(CurrX,NewCurrY),
@@ -104,7 +104,7 @@ move(w) :-
     asserta(posPlayer(CurrX,NewCurrY)),!
     ).
 
-move(a) :-
+moveA :-
     posPlayer(CurrX,CurrY),
     NewCurrX is (CurrX - 1),
     (isEdge(NewCurrX,CurrY),
@@ -113,7 +113,7 @@ move(a) :-
     retractall(posPlayer(_,_)),
     asserta(posPlayer(NewCurrX,CurrY)),!
     ).
-move(s) :-
+moveS :-
     posPlayer(CurrX,CurrY),
     NewCurrY is (CurrY + 1),
     (isEdge(CurrX,NewCurrY),
@@ -122,7 +122,7 @@ move(s) :-
     retractall(posPlayer(_,_)),
     asserta(posPlayer(CurrX,NewCurrY)),!
     ).
-move(d) :-
+moveD :-
     posPlayer(CurrX,CurrY),
     NewCurrX is (CurrX + 1),
     (isEdge(NewCurrX,CurrY),
