@@ -306,7 +306,7 @@ healPlayer(Heal) :-
 
 usePotion(Potion) :-
     currentInventory(Inventory),
-    \+ member(Potion,Inventory),!, format('You don\'t have ~w',[Potion]), fail.
+    \+ member(Potion,Inventory),!, format('You don\'t have ~w\n',[Potion]), fail.
 usePotion(Potion) :- 
     \+ gameState('Battle'),
     useItemFromInventory(Potion),
@@ -387,7 +387,7 @@ enemyTurn :-
         retractall(playerCurrentHealth(_)),
         asserta(playerCurrentHealth(PHealthNow)),
 
-        format('~w attacks!It dealt ~w damage!\n',[EName,TotalEnemyDamage]),
+        format('~w attacks!\nIt dealt ~w damage!\n',[EName,TotalEnemyDamage]),
 
         endTurn(Turn)),
     !.
