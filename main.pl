@@ -24,6 +24,11 @@ start :-
 consoleLoop :-
     repeat,
     map,
+    write('Commands:'), nl, /* Belum diimplementasikan */
+    write('1. moveW'), nl,
+    write('2. moveA'), nl,
+    write('3. moveS'), nl,
+    write('4. moveD'), nl,
     write(' > '),
     read(X),
     ( /* semua pemanggilan fungsi masuk ke sini */
