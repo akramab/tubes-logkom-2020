@@ -10,6 +10,21 @@
 
 :- dynamic(gameState/1).
 
+deleteItem :-
+    write('You are currently on delete screen'),nl,
+    write('Input the name of the item in between of single quotes (ex. \'Hero Sword\') that you want to delete'),nl,
+    write('to exit this screen, simply type exitDelItem'),nl,
+    write('(You must have said item in your inventory to delete it)'),nl,
+    repeat,
+        write(' > '),
+        read(ItemName),
+
+        (useItemFromInventory(ItemName) ->
+            format('You\'ve succesfully deleted ~w from your inventory\n',[ItemName]),fail
+        ;ItemName == exitDelItem -> !
+        ;write('\nInvalid Command\n'), fail
+        ).
+
 equip :-
     write('You are currently on equip screen'),nl,
     write('Input the name of the equipment in between of single quotes (ex. \'Hero Sword\') that you want to equip'),nl,
@@ -141,6 +156,7 @@ help :-
     write('d -- move right'), nl,
     write('status -- show player status'), nl,
     write('inventory -- show list of items in your inventory'),nl,
+    write('delItem -- delete an item in you inventory'),nl,
     write('showEquipment -- show your current equipment'),nl,
     write('equip -- equip a new equipment'),nl,
     write('unequip -- unequip a piece of your equipment'),nl,
@@ -148,6 +164,7 @@ help :-
     write('takeQuest -- take a quest (only available on Q spot)'),nl,
     write('shop -- access the shop. Could only be used when you\'re on the shop'),nl,
     write('map -- show the map and your current position'), nl,
+    write('potion -- use potion to regain your health'), nl,
     write('help -- show all of the currently available commands'), nl,
     write('quit -- quit the game'), nl.    
 
@@ -170,6 +187,7 @@ consoleLoop :-
     (X == d -> nl, moveD,specialPlace, encounterZone, gameState('Game Over')) ;
     (X == status -> nl, status, fail);
     (X == inventory -> nl, showInventory, fail);
+    (X == delItem -> nl, deleteItem, fail);
     (X == showEquipment -> nl, showEq, fail);
     (X == equip -> nl, equip, fail);
     (X == unequip -> nl, unequip, fail);
@@ -177,6 +195,7 @@ consoleLoop :-
     (X == takeQuest -> nl, takeQuest, fail);
     (X == shop -> nl, shop, fail);
     (X == map -> nl, map, fail );
+    (X == potion -> nl, usePotion('Health Potion'), fail);
     (X == help -> nl, help, fail);
     (X == quit); /* program selesai ketika player mengetikkan quit */
     (write('Invalid command!\n Type help if you want to know all the available commands\n'), fail)
