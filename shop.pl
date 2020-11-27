@@ -15,9 +15,9 @@ buy(Item) :-
     (GoldNow < 0,
         !, format('You don\'t have enough Gold to buy ~w!\n',[Item]), fail
     ;Item = 'Gacha',
+        gacha,
         retractall(playerGold(_)),
-        asserta(playerGold(GoldNow)),
-        gacha,!
+        asserta(playerGold(GoldNow)),!
     ;addItem(Item),
     retractall(playerGold(_)),
     asserta(playerGold(GoldNow)),
