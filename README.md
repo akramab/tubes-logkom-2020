@@ -1,4 +1,4 @@
-# RPG GACHA
+# TUBES IMPACT (RPG GACHA)
 ## Anggota Kelompok
 Kelompok 05 K-02 mata kuliah Logika Komputasional:
 1. 13519022 Jose Galbraith Hasintongan	

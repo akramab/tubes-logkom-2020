@@ -50,7 +50,7 @@ showInventory :-
     printInventory(Inventory), 
     maxInventory(MaxInventory),
     numberOfItemsInventory(CurrentNumberOfItems),
-    format('Inventory Capacity: ~w/~w',[CurrentNumberOfItems,MaxInventory]),!
+    format('Inventory Capacity: ~w/~w\n',[CurrentNumberOfItems,MaxInventory]),!
     ).
 
 useItemFromInventory(ItemName) :- 

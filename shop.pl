@@ -1,5 +1,6 @@
 /* ITEM PRICE */
 shopItem('Gacha', 100).
+shopItem('Health Potion', 10).
 shopItem('Basic Potion', 10).
 shopItem('Super Potion', 20).
 shopItem('Ultra Potion', 30).

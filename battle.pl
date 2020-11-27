@@ -15,6 +15,42 @@
 currentEnemyAttackElement('None').
 
 /*ENCOUNTER ENEMY*/
+battleEnemy :-
+    (gameState('Battle') ->
+        battleHelp,
+        repeat,
+        playerTurn,
+        \+ gameState('Battle')
+    ;!).
+
+battleHelp :-
+    currentEnemyName(EName),
+    write('attack -- use basic attack on the enemy'),nl,
+    write('specialAttack -- unleash your special attack and consume 3 special attack charges'),nl,
+    write('usePotion -- use potion to heal yourself'),nl,
+    write('run -- run away from the enemy (this action could fail)'),nl,
+    write('status -- check your current status'),nl,
+    write('enemyStatus -- check your current enemy status'), nl,
+    write('help -- show all of the currently available commands'),nl,
+    format('You\'re currently fighting ~w!\nWhat will you do?',[EName]), nl.
+
+playerTurn :-
+    repeat,
+    write(' > '),
+    read(X),
+    (
+    (X == attack -> nl, attack);
+    (X == specialAttack -> nl, specialAttack);
+    (X == usePotion -> nl, usePotion('Health Potion'), fail);
+    (X == run -> nl, run);
+    (X == status -> nl, status, fail);
+    (X == enemyStatus -> nl, enemyStatus, fail);
+    (X == help -> nl, battleHelp, fail);
+    (write('Invalid command!\n Type help if you want to know all the available commands\n'), fail)
+    ).
+
+
+
 encounter(Enemy) :-
     retractall(gameState(_)),
     asserta(gameState('Battle')),
@@ -32,18 +68,37 @@ encounter(Enemy) :-
     
 
     (EnemyRank = 'Normal' ->
-        format('You\'ve encountered a ~w!\nEngaging the enemy!',[Enemy]),!
+        format('You\'ve encountered a ~w!\nEngaging the enemy!\n\n',[Enemy]),!
     ;EnemyRank = 'Boss' ->
-        format('You\'ve encountered a Boss Monster: ~w.\nBe careful, it\'s a lot stronger than the usual ones!\nEngaging the enemy!',[Enemy]),!
+        format('You\'ve encountered a Boss Monster: ~w.\nBe careful, it\'s a lot stronger than the usual ones!\nEngaging the enemy!\n\n',[Enemy]),!
     ;EnemyRank = 'Final Boss' ->
-        format('At long last, this is the fated final battle.\nPlease defeat ~w and save the world!\nEngaging the enemy!',[Enemy]),!
+        format('At long last, this is the fated final battle.\nPlease defeat ~w and save the world!\nEngaging the enemy!\n\n',[Enemy]),!
     ;
     !).
 
 /*BATTLE CONDITION*/
+updateQuestKillCount :-
+    currentEnemyName(EName),
+    questKillCount(Slime,Goblin,Wolf),
+    monsterID(EName,MID),
+
+    (MID = 1 ->
+        retractall(questKillCount(_,_,_)),
+        N is (Slime +1),
+        asserta(questKillCount(N,Goblin,Wolf)),!
+    ;MID = 2 ->
+        retractall(questKillCount(_,_,_)),
+        N is (Goblin +1),
+        asserta(questKillCount(Slime,N,Wolf)),!
+    ;MID = 3 ->
+        retractall(questKillCount(_,_,_)),
+        N is (Wolf +1),
+        asserta(questKillCount(Slime,Goblin,N)),!
+    ;!
+    ).
+
+
 loseCondition :- 
-    retractall(gameState(_)),
-    asserta(gameState('Game Over')),
     write('You\'ve died. Because of your incompetence, the world is now doomed!'),nl,
     write('You can try again by selecting New Game or Load to start from your last saved checkpoint.'),nl,
     write('Or you can also quit the game by terminating the Terminal. Your choice.').
@@ -61,7 +116,11 @@ winBattleCondition :-
 
     format('You won the battle!\nYou got ~w Exp!\n',[ExpFromE]),
 
-    playerLevelUp,!.
+    questOpen(N),
+    (N = 1 ->
+        playerLevelUp,!
+    ;updateQuestKillCount, playerLevelUp),
+    !.
 
 
 /*TURN CHANGE
@@ -81,13 +140,15 @@ endTurn(Turn) :-
     currentEnemyHealth(ECurrentHealth),
 
     (PCurrentHealth < 0 ->
+        retractall(gameState(_)),
+        asserta(gameState('Game Over')),
         loseCondition,! 
     ;ECurrentHealth < 0 ->
         winBattleCondition,! 
     ;Turn = 1 ->
         enemyTurn,!
     ;Turn = 0 ->
-        ! /*Harusnya nanti manggil playerTurn. Tapi belum diimplementasiin*/
+        playerTurn /*Harusnya nanti manggil playerTurn. Tapi belum diimplementasiin*/
     ).
 
 
@@ -269,7 +330,7 @@ run :-
         write('You failed to run!'),
         retractall(playerRunAttempt(_)),
         RunAttemptNow is (RunAttempt - 1),
-        asserta(playerRunAttempt(RunAttemptNow)), !
+        asserta(playerRunAttempt(RunAttemptNow)), fail
     ;retractall(gameState(_)),
     asserta(gameState('Roam')),
     write('You got away safely. Resuming adventure\n'),!

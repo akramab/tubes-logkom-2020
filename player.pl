@@ -20,11 +20,12 @@
 :- dynamic(playerEquipmentWear/4).
 
 initClass :-
-    write('Choose your class:'), nl,
-    write('Format: <class>.'), nl,
-    write('1. swordsman'), nl,
-    write('2. archer'), nl,
-    write('3. sorcerer'), nl,
+    write(':::                                                       Choose your job:                                     :::'),nl,
+    write(':::                                                         Format: <job>.                                     :::'),nl,
+    write(':::                                                          1. swordsman                                      :::'),nl,
+    write(':::                                                          2. archer                                         :::'),nl,
+    write(':::                                                          3. sorcerer                                       :::'),nl,
+    write(':::............................................................................................................:::'),nl,
     repeat,
     write(' > '),
     read(Class),
@@ -70,7 +71,7 @@ initPlayer(Job) :-
     retractall(playerGold(_)),
 
     asserta(playerEquipmentWear(0,0,0,0)),
-    addItem('Basic Potion',5),
+    addItem('Health Potion',5),
 
     asserta(playerJob(Job)),
     baseJob(Job, BaseJob), asserta(playerBaseJob(BaseJob)),
@@ -234,7 +235,7 @@ equipJobRestriction(Type,EquipName,Attack,Defense) :-
 
     (BaseJob = JobRestriction,
         equipEquipmentStats(Type,EquipName,Attack,Defense),!
-    ;!,format('You can only wear ~w based equipments!',[BaseJob]),fail
+    ;!,format('You can only wear ~w based equipments!\n',[BaseJob]),fail
     ).
 
 
@@ -292,13 +293,13 @@ equipEquipmentStats(Type,EquipName,Attack,Defense) :-
 unequipEquipment(Type) :-
     playerEquipmentWear(CurHelm,CurChest,CurLeg,CurBoots),
     (Type = 'Helmet',
-        CurHelm = 0, !, write('You haven\'t equipped any helmet yet!'), fail
+        CurHelm = 0, !, write('You haven\'t equipped any helmet yet!\n'), fail
     ;Type = 'Chestplate',
-        CurChest = 0, !, write('You haven\'t equipped any chestplate yet!'), fail
+        CurChest = 0, !, write('You haven\'t equipped any chestplate yet!\n'), fail
     ;Type = 'Leggings',
-        CurLeg = 0, !, write('You haven\'t equipped any leggings yet!'), fail
+        CurLeg = 0, !, write('You haven\'t equipped any leggings yet!\n'), fail
     ;Type = 'Boots',
-        CurBoots = 0, !, write('You haven\'t equipped any boots yet'), fail
+        CurBoots = 0, !, write('You haven\'t equipped any boots yet\n'), fail
     ;unequipEquipmentStats(Type),!
     ).
 unequipEquipmentStats(Type) :-

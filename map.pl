@@ -8,6 +8,24 @@
 :- dynamic(wall/2).
 :- dynamic(questBoard/2).
 
+
+/*ZONE*/
+/*Zone merupakan sub bagian pada map yang membagi dengan garis horizonal menjadi 3 bagian.
+terdapat 3 buah zone dan tiap zone memiliki 
+kemungkinan untuk bertemu monster yang berbeda-beda
+
+Zone 1: 60% slime, 35% goblin, 5% wolf
+Zone 2: 60% goblin, 25% slime,  15% wolf
+Zone 3: 60% wolf, 20% goblin, 20% slime 
+
+fact zoneX menyimpan informasi:
+zoneX(Ymin,Ymax)
+di mana Ymin dan Ymax adalah partisi terhadap height dari map.*/
+
+zone1(1,4).
+zone2(5,8).
+zone3(9,12).
+
 initMap :- 
     retractall(height(_)),
     retractall(width(_)),
@@ -31,6 +49,8 @@ initMap :-
     random(11, 12, YPlayer),
     random(11, 24, XPlayer),
     asserta(posPlayer(XPlayer, YPlayer)).
+
+
 
 isEdgeW(_, Y) :- 
     Y is 0, !.

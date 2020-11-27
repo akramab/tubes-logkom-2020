@@ -1,4 +1,5 @@
 /* POTION */
+potion('Health Potion', 150).
 potion('Basic Potion', 30).
 potion('Super Potion', 60).
 potion('Ultra Potion', 100).
@@ -107,20 +108,20 @@ betterEquipment('Rare','Epic') :- !.
 /*EQUIPMENT STATS*/
 
 /*Swordsman*/
-equipmentStats('Helmet (Swordsman)','Normal',2,3) :- !.
-equipmentStats('Chestplate (Swordsman)','Normal',3,5) :- !.
-equipmentStats('Leggings (Swordsman)','Normal',3,4) :- !.
-equipmentStats('Boots (Swordsman)','Normal',1,2) :- !.
-/*Archer*/
+equipmentStats('Helmet','Normal',2,3) :- !.
+equipmentStats('Chestplate','Normal',3,5) :- !.
+equipmentStats('Leggings','Normal',3,4) :- !.
+equipmentStats('Boots','Normal',1,2) :- !.
+/*Archer
 equipmentStats('Helmet (Archer)','Normal',2,3) :- !.
 equipmentStats('Chestplate (Archer)','Normal',3,5) :- !.
 equipmentStats('Leggings (Archer)','Normal',3,4) :- !.
 equipmentStats('Boots (Archer)','Normal',1,2) :- !.
-/*Sorcerer*/
+Sorcerer
 equipmentStats('Helmet (Sorcerer)','Normal',2,3) :- !.
 equipmentStats('Chestplate (Sorcerer)','Normal',3,5) :- !.
 equipmentStats('Leggings (Sorcerer)','Normal',3,4) :- !.
-equipmentStats('Boots (Sorcerer)','Normal',1,2) :- !.
+equipmentStats('Boots (Sorcerer)','Normal',1,2) :- !.*/
 
 
 /*Above Normal Rarity*/
