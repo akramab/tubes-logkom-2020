@@ -137,9 +137,9 @@ winBattleCondition :-
 
 /*TURN CHANGE
 endTurn(PCurrentHealth,ECurrentHealth,Turn) :-
-    (PCurrentHealth < 0 ->
+    (PCurrentHealth =< 0 ->
         loseCondition,! 
-    ;ECurrentHealth < 0 ->
+    ;ECurrentHealth =< 0 ->
         winBattleCondition,! 
     ;Turn = 1 ->
         enemyTurn,!
@@ -151,11 +151,11 @@ endTurn(Turn) :-
     playerCurrentHealth(PCurrentHealth),
     currentEnemyHealth(ECurrentHealth),
 
-    (PCurrentHealth < 0 ->
+    (PCurrentHealth =< 0 ->
         retractall(gameState(_)),
         asserta(gameState('Game Over')),
         loseCondition,! 
-    ;ECurrentHealth < 0 ->
+    ;ECurrentHealth =< 0 ->
         winBattleCondition,! 
     ;Turn = 1 ->
         enemyTurn,!
