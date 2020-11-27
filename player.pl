@@ -386,4 +386,3 @@ unequipEquipmentStats(Type) :-
         write('Boots is unequipped\n'),
         format('Your stats\nAttack: ~w -> ~w\nDefense: ~w -> ~w\n',[CurrentAttack,NewAttack,CurrentDefense,NewDefense]),!
     ).
-

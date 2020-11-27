@@ -81,6 +81,3 @@ gacha :-
     addItem(EquipmentName),
     format('Purchase success! ~w has been added to your inventory!\n',[EquipmentName]),
     !.
-
-
-

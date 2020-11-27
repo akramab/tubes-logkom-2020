@@ -130,6 +130,3 @@ equipmentStats(Type,Rarity,Attack,Defense) :-
     equipmentStats(Type,BelowRarity,TempAttack,TempDefense),
     Attack is (2*TempAttack), Defense is (2*TempDefense),
     !.
-
-
-

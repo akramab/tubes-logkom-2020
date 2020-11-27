@@ -119,9 +119,10 @@ moveW :-
     NewCurrY is (CurrY - 1),
     (isEdge(CurrX,NewCurrY),
         !,write('There\'s a wall, you can\'t move there!\n'),fail
-    ;write('You move north\n'),
-    retractall(posPlayer(_,_)),
-    asserta(posPlayer(CurrX,NewCurrY)),!
+    ;retractall(posPlayer(_,_)),
+    asserta(posPlayer(CurrX,NewCurrY)),
+    map,
+    write('You move north\n'),!
     ).
 
 moveA :-
@@ -129,25 +130,27 @@ moveA :-
     NewCurrX is (CurrX - 1),
     (isEdge(NewCurrX,CurrY),
         !,write('There\'s a wall, you can\'t move there!\n'),fail
-    ;write('You move west\n'),
-    retractall(posPlayer(_,_)),
-    asserta(posPlayer(NewCurrX,CurrY)),!
+    ;retractall(posPlayer(_,_)),
+    asserta(posPlayer(NewCurrX,CurrY)),
+    map,write('You move west\n'),!
     ).
 moveS :-
     posPlayer(CurrX,CurrY),
     NewCurrY is (CurrY + 1),
     (isEdge(CurrX,NewCurrY),
         !,write('There\'s a wall, you can\'t move there!\n'),fail
-    ;write('You move south\n'),
-    retractall(posPlayer(_,_)),
-    asserta(posPlayer(CurrX,NewCurrY)),!
+    ;retractall(posPlayer(_,_)),
+    asserta(posPlayer(CurrX,NewCurrY)),
+    map,
+    write('You move south\n'),!
     ).
 moveD :-
     posPlayer(CurrX,CurrY),
     NewCurrX is (CurrX + 1),
     (isEdge(NewCurrX,CurrY),
         !,write('There\'s a wall, you can\'t move there!\n'),fail
-    ;write('You move east\n'),
-    retractall(posPlayer(_,_)),
-    asserta(posPlayer(NewCurrX,CurrY)),!
+    ;retractall(posPlayer(_,_)),
+    asserta(posPlayer(NewCurrX,CurrY)),
+    map,
+    write('You move east\n'),!
     ).

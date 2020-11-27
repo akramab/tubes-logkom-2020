@@ -390,4 +390,3 @@ enemyStatus :-
     format('Attack: ~w\n',[Attack]),
     format('Defense: ~w\n',[Defense]),
     !.
-

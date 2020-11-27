@@ -62,4 +62,3 @@ useItemFromInventory(ItemName) :-
 
     select(ItemName,Inventory,InventoryNow),
     asserta(currentInventory(InventoryNow)),!.
-
