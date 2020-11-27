@@ -78,8 +78,8 @@ shop :-
         write(' > '),
         read(X),
         (
-        (X == gacha -> buy('Gacha')),!;
-        (X == potion -> buy('Health Potion')),!;
+        (X == gacha -> !,buy('Gacha'));
+        (X == potion -> !,buy('Health Potion'));
         (X == exitShop -> write('Thanks for coming\n')),!;
         (write('There\'s no such item!\n'),fail)
         ).
