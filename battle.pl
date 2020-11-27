@@ -330,7 +330,7 @@ run :-
         write('You failed to run!\n'),
         retractall(playerRunAttempt(_)),
         RunAttemptNow is (RunAttempt - 1),
-        asserta(playerRunAttempt(RunAttemptNow)), fail
+        asserta(playerRunAttempt(RunAttemptNow)), !, fail
     ;retractall(gameState(_)),
     asserta(gameState('Roam')),
     write('You got away safely. Resuming adventure\n'),!
