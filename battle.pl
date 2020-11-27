@@ -327,7 +327,7 @@ run :-
     (RunAttempt = 0 ->
         write('You can\'t run anymore!\n It\'s kill or be killed... good luck!\n'), !, fail
     ;Run =< 5 ->
-        write('You failed to run!'),
+        write('You failed to run!\n'),
         retractall(playerRunAttempt(_)),
         RunAttemptNow is (RunAttempt - 1),
         asserta(playerRunAttempt(RunAttemptNow)), fail

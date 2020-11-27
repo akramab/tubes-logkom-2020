@@ -38,7 +38,7 @@ questReward(Gold, Exp) :-
     Exp is ((Slime * 100) + (Goblin * 300) + (Wolf * 500)).
 
 
-questReward(Q, Gold, Exp) :-
+questReward3(Q, Gold, Exp) :-
     quest(Slime, Goblin, Wolf) = Q,
     Gold is ((Slime * 10) + (Goblin * 30) + (Wolf * 50)),
     Exp is ((Slime * 100) + (Goblin * 300) + (Wolf * 500)).
@@ -57,7 +57,7 @@ questScreen :-
     retractall(quest(_, _, _)),
     write('Available Quests:'), nl,
     questGenerate(Q1), questGenerate(Q2), questGenerate(Q3),
-    questReward(Q1, G1, E1), questReward(Q2, G2, E2), questReward(Q3, G3, E3),
+    questReward3(Q1, G1, E1), questReward3(Q2, G2, E2), questReward3(Q3, G3, E3),
     write('1. '), questDisplay(Q1), nl,
     write('   Reward: '), write(G1), write(' gold, '), write(E1), write(' exp.'), nl,
     write('2. '), questDisplay(Q2), nl,
