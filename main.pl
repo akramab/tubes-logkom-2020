@@ -25,10 +25,10 @@ consoleLoop :-
     repeat,
     map,
     write('Commands:'), nl, /* Placeholder, silakan diganti, belum diimplementasikan */
-    write('1. moveW'), nl,
-    write('2. moveA'), nl,
-    write('3. moveS'), nl,
-    write('4. moveD'), nl,
+    write('1. w -> move up'), nl,
+    write('2. a -> move left'), nl,
+    write('3. s -> move down'), nl,
+    write('4. d -> move right'), nl,
     write(' > '),
     read(X),
     ( /* semua pemanggilan fungsi masuk ke sini */
