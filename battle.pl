@@ -296,7 +296,7 @@ healPlayer(Heal) :-
 
     PHealthNow is (PCurrentHealth+Heal),
 
-    format('You regained ~w Health',[Heal]),
+    format('You regained ~w Health\n',[Heal]),
 
     (PHealthNow >= PMaxHealth ->
         asserta(playerCurrentHealth(PMaxHealth)),!
