@@ -97,6 +97,16 @@ updateQuestKillCount :-
     ;!
     ).
 
+winGameCondition :-
+    retractall(gameState(_)),
+    asserta(gameState('Finish')),
+
+    retractall(dragon(_,_)),
+    asserta(dragon(100,100)),
+
+    write('You\'ve defeated the Dragon.'),nl,
+    write('Because of your accomplishment, everyone will remember you as... The Legendary Hero!\n').
+
 
 loseCondition :- 
     write('You\'ve died. Because of your incompetence, the world is now doomed!'),nl,
@@ -117,7 +127,9 @@ winBattleCondition :-
     format('You won the battle!\nYou got ~w Exp!\n',[ExpFromE]),
 
     questOpen(N),
-    (N = 1 ->
+    (currentEnemyName('Alduin') ->
+        winGameCondition,!
+    ;N = 1 ->
         playerLevelUp,!
     ;updateQuestKillCount, playerLevelUp),
     !.
