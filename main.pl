@@ -72,22 +72,21 @@ accessQuest :- !.
 
 specialPlace :-
     posPlayer(CurrX,CurrY),
-    dragon(DX,DY),
     questBoard(QX,QY),
-    (CurrX = DX, CurrY = DY ->
-        encounter('Alduin'), !, battleEnemy, fail
-    ;CurrX = QX, CurrY = QY ->
+    (CurrX = QX, CurrY = QY ->
         accessQuest, !, fail
     ;!).
 
 
 encounterZone :-
-    posPlayer(_,CurrY),
+    posPlayer(CurrX,CurrY),
     zone1(_,Y1),
     zone2(_,Y2),
     zone3(_,Y3),
 
-    (CurrY =< Y1 ->
+    (dragon(CurrX,CurrY) ->
+        encounter('Alduin'), battleEnemy, !
+    ;CurrY =< Y1 ->
         encounterRate(60,95,100), !
     ;CurrY =< Y2 ->
         encounterRate(25,85,100), !
