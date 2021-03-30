@@ -2,7 +2,6 @@
 /* Basic Job */
 job('Basic', 'Swordsman').
 job('Basic', 'Archer').
-job('Basic', 'Sorcerer').
 
 /* Specialized Job */
 job('Specialized', 'Swordmaster').
